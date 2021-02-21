@@ -1,8 +1,12 @@
-/*
- * Goose.h
- *
- *  Created on: Feb 19, 2021
- *      Author: 1350703_snhu
+/**
+ * @file Goose.h
+ * @author Winston Spencer
+ * @brief The Goose class definition
+ * @version 0.1
+ * @date 2021-02-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
  */
 
 #ifndef GOOSE_H_
@@ -10,10 +14,20 @@
 
 #include "Oviparous.h"
 
-class Goose: public Oviparous {
+class Goose : public Oviparous
+{
 public:
-	Goose();
-	virtual ~Goose();
+  /**
+   * @brief Construct a new Goose object
+   * 
+   */
+  Goose();
+
+  /**
+   * @brief Destroy the Goose object
+   * 
+   */
+  virtual ~Goose();
 };
 
 #endif /* GOOSE_H_ */

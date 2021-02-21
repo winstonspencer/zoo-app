@@ -7,14 +7,21 @@
 
 #include "Crocodile.h"
 
-Crocodile::Crocodile() :
-    Oviparous() {
+/**
+ * @brief Construct a new Crocodile object
+ * 
+ */
+Crocodile::Crocodile() : Oviparous()
+{
   this->setType("Crocodile");
   this->setParentType("Oviparous");
-
 }
 
-Crocodile::~Crocodile() {
+/**
+ * @brief Destroy the Crocodile object
+ * 
+ */
+Crocodile::~Crocodile()
+{
   // TODO Auto-generated destructor stub
 }
-

@@ -1,19 +1,31 @@
-/*
- * SealLion.cpp
- *
- *  Created on: Feb 19, 2021
- *      Author: 1350703_snhu
+/**
+ * @file SeaLion.cpp
+ * @author Winston Spencer
+ * @brief  The SeaLion class implementation
+ * @version 0.1
+ * @date 2021-02-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
  */
 
 #include "SeaLion.h"
 
-SeaLion::SeaLion() :
-    Mammal() {
+/**
+ * @brief Construct a new Sea Lion object
+ * 
+ */
+SeaLion::SeaLion() : Mammal()
+{
   this->setType("SeaLion");
   this->setParentType("Mammal");
 }
 
-SeaLion::~SeaLion() {
+/**
+ * @brief Destroy the Sea Lion object
+ * 
+ */
+SeaLion::~SeaLion()
+{
   // Do nothing;
 }
-

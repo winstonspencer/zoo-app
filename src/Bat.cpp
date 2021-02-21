@@ -1,19 +1,32 @@
-/*
- * Bat.cpp
- *
- *  Created on: Feb 19, 2021
- *      Author: 1350703_snhu
+/**
+ * @file Bat.h
+ * @author Winston Spencer
+ * @brief The Bat class implementation
+ * @version 0.1
+ * @date 2021-02-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
  */
 
 #include <string>
 #include "Bat.h"
 
-Bat::Bat() :
-    Mammal() {
+/**
+ * @brief Construct a new Bat object
+ * 
+ */
+Bat::Bat() : Mammal()
+{
   this->setType("Bat");
   this->setParentType("Mammal");
 }
 
-Bat::~Bat() {
+/**
+ * @brief Destroy the Bat object
+ * 
+ */
+Bat::~Bat()
+{
   // TODO Auto-generated destructor stub
 }

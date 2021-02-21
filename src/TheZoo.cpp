@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+#include "Animal.h"
 #include "Serializer.h"
 #include "Serializer.h"
 #include "ZooKeeper.h"
@@ -16,6 +17,13 @@ void GenerateData() //DO NOT TOUCH CODE IN THIS METHOD
   // Do nothing
 }
 
+/**
+ * @brief Adds an animal to the vector
+ * 
+ * @param t_zooKeeper The zookeeper object
+ * @param t_serializer The serializer object
+ * @param t_animals The vector of animals
+ */
 void AddAnimal(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
 {
 
@@ -29,6 +37,13 @@ void AddAnimal(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> 
   t_zooKeeper.displayContinueMenu();
 }
 
+/**
+ * @brief Deletes an animal from the vector
+ * 
+ * @param t_zooKeeper The zookeeper object
+ * @param t_serializer The serializer object
+ * @param t_animals The vector of animals
+ */
 void RemoveAnimal(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
 {
   // Display the animals in the vector
@@ -41,6 +56,13 @@ void RemoveAnimal(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal 
   t_zooKeeper.displayContinueMenu();
 }
 
+/**
+ * @brief Load the animal data from file.
+ * 
+ * @param t_zooKeeper The zookeeper object
+ * @param t_serializer The serializer object
+ * @param t_animals The vector of animals
+ */
 void LoadDataFromFile(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
 {
 
@@ -53,8 +75,9 @@ void LoadDataFromFile(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Ani
 /**
  * @brief Saves the animal data to a file
  * 
- * @param t_serialzer The serializer used to save the animal data to a file.
- * @param t_animals The animal data to save to a file.
+ * @param t_zooKeeper The zookeeper object
+ * @param t_serializer The serializer object
+ * @param t_animals The vector of animals
  */
 void SaveDataToFile(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
 {
@@ -63,7 +86,13 @@ void SaveDataToFile(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Anima
   t_zooKeeper.displayContinueMenu();
   return;
 }
-
+/**
+ * @brief Prints the animal data to the screen
+ * 
+ * @param t_zooKeeper The zookeeper object
+ * @param t_serializer The serializer object
+ * @param t_animals The vector of animals
+ */
 void PrintAnimals(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
 {
 
@@ -74,6 +103,10 @@ void PrintAnimals(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal 
   t_zooKeeper.displayContinueMenu();
 }
 
+/**
+ * @brief Display the main menu
+ * 
+ */
 void DisplayMenu()
 {
 
@@ -120,6 +153,11 @@ void DisplayMenu()
   delete serializer;
 }
 
+/**
+ * @brief The application main entry point.
+ * 
+ * @return int 
+ */
 int main()
 {
   DisplayMenu();

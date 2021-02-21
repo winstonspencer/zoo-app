@@ -1,7 +1,7 @@
 /**
  * @file Display.h
  * @author Winston Spencer
- * @brief The Wildlife Zoom Display Class Definition
+ * @brief The ZooKeeper Class Definition
  * @version 0.1
  * @date 2021-02-19
  *

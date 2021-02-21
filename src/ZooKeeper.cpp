@@ -1,7 +1,7 @@
 /**
  * @file Menu.h
  * @author Winston Spencer
- * @brief The Wildlife ZooKeeper Implementation
+ * @brief The ZooKeeper Class Implementation
  * @version 0.1
  * @date 2021-02-02
  *

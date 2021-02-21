@@ -1,29 +1,54 @@
-/*
- * Oviparous.cpp
- *
- *  Created on: Feb 19, 2021
- *      Author: 1350703_snhu
+/**
+ * @file Oviparous.h
+ * @author Winston Spencer
+ * @brief The Oviparous class implementation
+ * @version 0.1
+ * @date 2021-02-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
  */
+
 
 #include "Oviparous.h"
 #include <string>
 
-Oviparous::Oviparous() :
-    Animal() {
+/**
+ * @brief Construct a new Oviparous:: Oviparous object
+ * 
+ */
+Oviparous::Oviparous() : Animal()
+{
   this->m_numberOfEggs = 0;
   this->setType("Oviparous");
   this->setParentType("Animal");
 }
 
-Oviparous::~Oviparous() {
+/**
+ * @brief Destroy the Oviparous:: Oviparous object
+ * 
+ */
+Oviparous::~Oviparous()
+{
   delete &this->m_numberOfEggs;
 }
 
-int Oviparous::getNumberOfEggs() {
+/**
+ * @brief Get the Number Of Eggs object
+ * 
+ * @return int 
+ */
+int Oviparous::getNumberOfEggs()
+{
   return this->m_numberOfEggs;
 }
 
-void Oviparous::setNumberOfEggs(int t_numberOfEggs) {
+/**
+ * @brief Set the Number Of Eggs object
+ * 
+ * @param t_numberOfEggs 
+ */
+void Oviparous::setNumberOfEggs(int t_numberOfEggs)
+{
   this->m_numberOfEggs = t_numberOfEggs;
 }
-

@@ -1,19 +1,31 @@
-/*
- * Goose.cpp
- *
- *  Created on: Feb 19, 2021
- *      Author: 1350703_snhu
+/**
+ * @file Goose.h
+ * @author Winston Spencer
+ * @brief The Goose class implementation
+ * @version 0.1
+ * @date 2021-02-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
  */
 
 #include "Goose.h"
 
-Goose::Goose() :
-    Oviparous() {
+/**
+ * @brief Construct a new Goose object
+ * 
+ */
+Goose::Goose() : Oviparous()
+{
   this->setType("Goose");
   this->setParentType("Oviparous");
 }
 
-Goose::~Goose() {
+/**
+ * @brief Destroy the Goose object
+ * 
+ */
+Goose::~Goose()
+{
   // TODO Auto-generated destructor stub
 }
-

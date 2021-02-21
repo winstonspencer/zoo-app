@@ -7,13 +7,21 @@
 
 #include "Pelican.h"
 
-Pelican::Pelican() :
-    Oviparous() {
+/**
+ * @brief Construct a new Pelican object
+ * 
+ */
+Pelican::Pelican() : Oviparous()
+{
   this->setType("Pelican");
   this->setParentType("Oviparous");
 }
 
-Pelican::~Pelican() {
+/**
+ * @brief Destroy the Pelican object
+ * 
+ */
+Pelican::~Pelican()
+{
   // TODO Auto-generated destructor stub
 }
-

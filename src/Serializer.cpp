@@ -1,7 +1,7 @@
 /**
  * @file Serializer.h
  * @author Winston Spencer
- * @brief Serialize and Deserialize the Animal object
+ * @brief The Serializer class implementation
  * @version 0.1
  * @date 2021-02-21
  * 
