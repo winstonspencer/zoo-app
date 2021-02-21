@@ -21,7 +21,8 @@
 // Use the standard namespance (std)
 using namespace std;
 
-class ZooKeeper {
+class ZooKeeper
+{
 
 private:
   /**
@@ -31,7 +32,7 @@ private:
    * @param t_value The user input value
    *
    */
-  void collectUserInput(string t_userPrompt, int& t_value);
+  void collectUserInput(string t_userPrompt, int &t_value);
 
   /**
    * @brief Collects the user input as a string
@@ -40,7 +41,7 @@ private:
    * @param t_value The user input value
    *
    */
-  void collectUserInput(string t_userPrompt, string& t_value);
+  void collectUserInput(string t_userPrompt, string &t_value);
 
 public:
   /**
@@ -55,7 +56,7 @@ public:
    *
    * @param t_animals The vector of t_animals to display
    */
-  void displayAnimals(vector<Animal*> &t_animals);
+  void displayAnimals(vector<Animal *> &t_animals);
 
   /**
    * @brief Collect the Animal Data from the user.
@@ -64,7 +65,7 @@ public:
    *
    * @return Animal the data collected by the user
    */
-  Animal* collectAnimalData(Serializer t_serialzer);
+  Animal *collectAnimalData(Serializer t_serialzer);
 
   /**
    * @brief Removed an animal from the specified vector
@@ -72,7 +73,7 @@ public:
    * @param t_animals The vector container all animals 
    * @return true if successful else false.
    */
-  void deleteAnimalData(vector<Animal*> &t_animals);
+  void deleteAnimalData(vector<Animal *> &t_animals);
 
   /**
    * @brief Display the continue menu.
@@ -85,7 +86,6 @@ public:
    *
    */
   void displayExitScreen();
-
 };
 
 #endif

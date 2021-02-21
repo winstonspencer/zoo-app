@@ -8,6 +8,9 @@
 
 using namespace std;
 
+// The filename
+const string filename = "zoodata.txt";
+
 void GenerateData() //DO NOT TOUCH CODE IN THIS METHOD
 {
   // Do nothing
@@ -41,18 +44,24 @@ void RemoveAnimal(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal 
 void LoadDataFromFile(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
 {
 
-  string fileName("zoodata.txt");
-  t_serializer.read(fileName, t_animals);
+  t_serializer.read(filename, t_animals);
   cout << "Data loaded successfully." << endl;
   t_zooKeeper.displayContinueMenu();
   return;
 }
 
+/**
+ * @brief Saves the animal data to a file
+ * 
+ * @param t_serialzer The serializer used to save the animal data to a file.
+ * @param t_animals The animal data to save to a file.
+ */
 void SaveDataToFile(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
 {
-  /*
-   TODO: Write proper code to store vector/array to file.
-   */
+  t_serializer.write(filename, *t_animals);
+  cout << "Data written successfully." << endl;
+  t_zooKeeper.displayContinueMenu();
+  return;
 }
 
 void PrintAnimals(ZooKeeper t_zooKeeper, Serializer t_serializer, vector<Animal *> *t_animals)
@@ -71,7 +80,7 @@ void DisplayMenu()
   int input = 0;
   vector<Animal *> animals;
   ZooKeeper *zooKeeper = new ZooKeeper();
-  Serializer *deserializer = new Serializer();
+  Serializer *serializer = new Serializer();
 
   do
   {
@@ -79,24 +88,28 @@ void DisplayMenu()
     input = zooKeeper->displayMainMenu();
     if (input == 1)
     {
-      LoadDataFromFile(*zooKeeper, *deserializer, &animals);
+      LoadDataFromFile(*zooKeeper, *serializer, &animals);
     }
     else if (input == 2)
     {
       GenerateData();
-      LoadDataFromFile(*zooKeeper, *deserializer, &animals);
+      LoadDataFromFile(*zooKeeper, *serializer, &animals);
     }
     else if (input == 3)
     {
-      PrintAnimals(*zooKeeper, *deserializer, &animals);
+      PrintAnimals(*zooKeeper, *serializer, &animals);
     }
     else if (input == 4)
     {
-      AddAnimal(*zooKeeper, *deserializer, &animals);
+      AddAnimal(*zooKeeper, *serializer, &animals);
     }
     else if (input == 5)
     {
-      RemoveAnimal(*zooKeeper, *deserializer, &animals);
+      RemoveAnimal(*zooKeeper, *serializer, &animals);
+    }
+    else if (input == 6)
+    {
+      SaveDataToFile(*zooKeeper, *serializer, &animals);
     }
 
   } while (input != 7);
@@ -104,7 +117,7 @@ void DisplayMenu()
   zooKeeper->displayExitScreen();
 
   delete zooKeeper;
-  delete deserializer;
+  delete serializer;
 }
 
 int main()

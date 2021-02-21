@@ -2,6 +2,6 @@
 0001002 Shamooo          Mammal           Whale            0 0
 0001003 Mother           Oviparous        Goose            990
 0001004 Ali              Oviparous        Crocodile        210
-0001005 Jon              Oviparous        Pelican          7 1
-0001006 Flipper          Mammal           SeaLion          0 0
-0001007 Wingding         Mammal           Bat              0 0
+0001005 Jon              Oviparous        Pelican          7 0
+0001006 Flipper          Mammal           SeaLion          0 1
+0001007 Wingding         Mammal           Bat              0 1
