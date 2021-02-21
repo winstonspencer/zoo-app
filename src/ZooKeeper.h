@@ -16,12 +16,12 @@
 #include <string>
 #include <vector>
 #include "Animal.h"
-#include "Deserialzer.h"
+#include "Serializer.h"
 
 // Use the standard namespance (std)
 using namespace std;
 
-class Display {
+class ZooKeeper {
 
 private:
   /**
@@ -31,7 +31,7 @@ private:
    * @param t_value The user input value
    *
    */
-  void collectUserInput(string t_userPrompt, int* t_value);
+  void collectUserInput(string t_userPrompt, int& t_value);
 
   /**
    * @brief Collects the user input as a string
@@ -40,7 +40,7 @@ private:
    * @param t_value The user input value
    *
    */
-  void collectUserInput(string t_userPrompt, string* t_value);
+  void collectUserInput(string t_userPrompt, string& t_value);
 
 public:
   /**
@@ -60,11 +60,19 @@ public:
   /**
    * @brief Collect the Animal Data from the user.
    *
-   * @param t_deserialzer The deserialer used to create the Animal object
+   * @param t_serialzer The deserialer used to create the Animal object
    *
    * @return Animal the data collected by the user
    */
-  Animal* collectAnimalData(Deserialzer t_deserialzer);
+  Animal* collectAnimalData(Serializer t_serialzer);
+
+  /**
+   * @brief Removed an animal from the specified vector
+   * 
+   * @param t_animals The vector container all animals 
+   * @return true if successful else false.
+   */
+  void deleteAnimalData(vector<Animal*> &t_animals);
 
   /**
    * @brief Display the continue menu.

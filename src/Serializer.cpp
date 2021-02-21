@@ -1,28 +1,32 @@
-/*
- * Deserialzer.cpp
- *
- *  Created on: Feb 19, 2021
- *      Author: 1350703_snhu
+/**
+ * @file Serializer.h
+ * @author Winston Spencer
+ * @brief Serialize and Deserialize the Animal object
+ * @version 0.1
+ * @date 2021-02-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
  */
 
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <exception>
-#include "Deserialzer.h"
+#include "Serializer.h"
 
 using namespace std;
 
-Deserialzer::Deserialzer() {
+Serializer::Serializer() {
   // TODO Auto-generated constructor stub
 
 }
 
-Deserialzer::~Deserialzer() {
+Serializer::~Serializer() {
   // TODO Auto-generated destructor stub
 }
 
-string Deserialzer::trim(std::string t_value) {
+string Serializer::trim(std::string t_value) {
 
   int index = 0;
   string result;
@@ -42,7 +46,7 @@ string Deserialzer::trim(std::string t_value) {
   return result;
 }
 
-bool Deserialzer::contains(std::vector<Animal*> * t_animals, Animal* t_animal) {
+bool Serializer::contains(std::vector<Animal*> * t_animals, Animal* t_animal) {
 
   bool results = false;
   if (t_animals != nullptr && t_animal != nullptr) {
@@ -56,7 +60,7 @@ bool Deserialzer::contains(std::vector<Animal*> * t_animals, Animal* t_animal) {
   return results;
 }
 
-int Deserialzer::parseIndexAsInt(int t_index, string t_record) {
+int Serializer::parseIndexAsInt(int t_index, string t_record) {
 
   int result;
   string value = "";
@@ -75,7 +79,7 @@ int Deserialzer::parseIndexAsInt(int t_index, string t_record) {
   return result;
 }
 
-string Deserialzer::parseIndex(int t_index, string t_record) {
+string Serializer::parseIndex(int t_index, string t_record) {
 
   int position;
   int offset;
@@ -110,7 +114,7 @@ string Deserialzer::parseIndex(int t_index, string t_record) {
   return result;
 }
 
-Bat* Deserialzer::createBat(int t_trackNum, string t_name, int t_nursing) {
+Bat* Serializer::createBat(int t_trackNum, string t_name, int t_nursing) {
   Bat* bat = new Bat();
   bat->setTrackNum(t_trackNum);
   bat->setName(t_name);
@@ -118,35 +122,35 @@ Bat* Deserialzer::createBat(int t_trackNum, string t_name, int t_nursing) {
   return bat;
 }
 
-Crocodile* Deserialzer::createCrocodile(int t_trackNum, std::string t_name, int t_eggs) {
+Crocodile* Serializer::createCrocodile(int t_trackNum, std::string t_name, int t_eggs) {
   Crocodile* crocodile = new Crocodile();
   crocodile->setTrackNum(t_trackNum);
   crocodile->setName(t_name);
   crocodile->setNumberOfEggs(t_eggs);
   return crocodile;
 }
-Goose* Deserialzer::createGoose(int t_trackNum, std::string t_name, int t_eggs) {
+Goose* Serializer::createGoose(int t_trackNum, std::string t_name, int t_eggs) {
   Goose* goose = new Goose();
   goose->setTrackNum(t_trackNum);
   goose->setName(t_name);
   goose->setNumberOfEggs(t_eggs);
   return goose;
 }
-Pelican* Deserialzer::createPelican(int t_trackNum, std::string t_name, int t_eggs) {
+Pelican* Serializer::createPelican(int t_trackNum, std::string t_name, int t_eggs) {
   Pelican* pelican = new Pelican();
   pelican->setTrackNum(t_trackNum);
   pelican->setName(t_name);
   pelican->setNumberOfEggs(t_eggs);
   return pelican;
 }
-SeaLion* Deserialzer::createSeaLion(int t_trackNum, std::string t_name, int t_nursing) {
+SeaLion* Serializer::createSeaLion(int t_trackNum, std::string t_name, int t_nursing) {
   SeaLion* seaLion = new SeaLion();
   seaLion->setTrackNum(t_trackNum);
   seaLion->setName(t_name);
   seaLion->setNursing(t_nursing);
   return seaLion;
 }
-Whale* Deserialzer::createWhale(int t_trackNum, std::string t_name, int t_nursing) {
+Whale* Serializer::createWhale(int t_trackNum, std::string t_name, int t_nursing) {
   Whale* whale = new Whale();
   whale->setTrackNum(t_trackNum);
   whale->setName(t_name);
@@ -154,7 +158,7 @@ Whale* Deserialzer::createWhale(int t_trackNum, std::string t_name, int t_nursin
   return whale;
 }
 
-Animal* Deserialzer::convert(string t_record) {
+Animal* Serializer::convert(string t_record) {
 
   int nursing;
   int eggs;
@@ -173,7 +177,7 @@ Animal* Deserialzer::convert(string t_record) {
   return this->read(trackNum, name, subType, eggs, nursing);
 }
 
-Animal* Deserialzer::read(int t_trackNum, string t_name, string t_subType, int t_eggs, int t_nursing) {
+Animal* Serializer::read(int t_trackNum, string t_name, string t_subType, int t_eggs, int t_nursing) {
 
   Animal* animal = nullptr;
   if (t_subType == "Bat") {
@@ -193,11 +197,10 @@ Animal* Deserialzer::read(int t_trackNum, string t_name, string t_subType, int t
   return animal;
 }
 
-vector<Animal*> Deserialzer::read(string t_fileName) {
+void Serializer::read(string t_fileName, vector<Animal *>* t_animals) {
 
   string record;
   Animal * animal = nullptr;
-  vector<Animal*> animals;
 
   try {
 
@@ -207,8 +210,8 @@ vector<Animal*> Deserialzer::read(string t_fileName) {
       while (getline(inFile, record)) {
 
         animal = this->convert(record);
-        if (nullptr != animal && false == this->contains(&animals, animal)) {
-          animals.push_back(animal);
+        if (nullptr != animal && false == this->contains(t_animals, animal)) {
+          t_animals->push_back(animal);
         }
       }
 
@@ -221,5 +224,21 @@ vector<Animal*> Deserialzer::read(string t_fileName) {
     cout << "Error reading file: [" << t_fileName << "]." << endl;
   }
 
-  return animals;
+  return;
+}
+
+void Serializer::write(string t_fileName, vector<Animal *>* t_animals) {
+
+  string record;
+  Animal * animal = nullptr;
+
+  try {
+
+    
+
+  } catch (exception& e) {
+    cout << "Error writing to file: [" << t_fileName << "]." << endl;
+  }
+
+  return;
 }

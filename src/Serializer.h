@@ -1,12 +1,15 @@
-/*
- * Deserialzer.h
- *
- *  Created on: Feb 19, 2021
- *      Author: 1350703_snhu
+/**
+ * @file Serializer.h
+ * @author Winston Spencer
+ * @brief Serialize and Deserialize the Animal object
+ * @version 0.1
+ * @date 2021-02-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
  */
-
-#ifndef DESERIALZER_H_
-#define DESERIALZER_H_
+#ifndef SERIALIZER_H_
+#define SERIALIZER_H_
 
 #include <string>
 #include <vector>
@@ -18,7 +21,7 @@
 #include "SeaLion.h"
 #include "Whale.h"
 
-class Deserialzer {
+class Serializer {
 
 private:
   std::string trim(std::string t_value);
@@ -33,11 +36,12 @@ private:
   Animal* convert(std::string t_record);
 
 public:
-  Deserialzer();
-  virtual ~Deserialzer();
+  Serializer();
+  virtual ~Serializer();
   bool contains(std::vector<Animal*> * t_animals, Animal* t_animal);
-  std::vector<Animal*> read(std::string t_fileName);
+  void read(std::string t_fileName, std::vector<Animal *>* animals);
   Animal* read(int t_trackNum, std::string t_name, std::string t_subType, int t_eggs, int t_nursing);
+  void write(std::string t_fileName, std::vector<Animal *>* animals);
 };
 
-#endif /* DESERIALZER_H_ */
+#endif /* SERIALIZER_H_ */

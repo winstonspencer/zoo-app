@@ -1,7 +1,7 @@
 /**
  * @file Menu.h
  * @author Winston Spencer
- * @brief The Wildlife Zoom Display Implementation
+ * @brief The Wildlife ZooKeeper Implementation
  * @version 0.1
  * @date 2021-02-02
  *
@@ -17,7 +17,7 @@
 #include <iostream>
 #include <exception>
 
-#include "Display.h"
+#include "ZooKeeper.h"
 #include "Table.h"
 #include "Formatter.h"
 #include "Mammal.h"
@@ -33,22 +33,24 @@ using namespace std;
  * @param t_value The user input value
  *
  */
-void Display::collectUserInput(string t_userPrompt, int* t_value) {
+void ZooKeeper::collectUserInput(string t_userPrompt, int &t_value)
+{
   // Create the user input.
   string userInput;
 
-  try {
-    cout << t_userPrompt;
+  try
+  {
 
     // Get the user input within the trycatch
-    getline(cin, userInput);
+    this->collectUserInput(t_userPrompt, userInput);
 
     // Convert the user input to an int.
-    *t_value = stoi(userInput);
-
-    cout << endl;
-  } catch (exception &e) {
-    *t_value = 1;
+    t_value = stoi(userInput);
+  }
+  catch (exception &e)
+  {
+    t_value = 0;
+    cout << "Error converting [" + userInput + "] to int.  " << e.what() << endl;
   }
 }
 
@@ -59,54 +61,99 @@ void Display::collectUserInput(string t_userPrompt, int* t_value) {
  * @param t_value The user input value
  *
  */
-void Display::collectUserInput(string t_userPrompt, string* t_value) {
-  // Create the user input.
-  string userInput;
+void ZooKeeper::collectUserInput(string t_userPrompt, string &t_value)
+{
 
-  try {
+  try
+  {
     cout << t_userPrompt;
 
     // Get the user input within the trycatch
-    getline(cin, userInput);
-
-    // Convert the user input to an int.
-    *t_value = stoi(userInput);
-
-    cout << endl;
-  } catch (exception &e) {
-    *t_value = "";
+    getline(cin, t_value);
   }
+  catch (exception &e)
+  {
+    cout << "Error collecting user input.  " << e.what() << endl;
+  }
+}
+
+/**
+ * @brief Removed an animal from the specified vector
+ * 
+ * @param t_animals The vector container all animals 
+ * @return true if successful else false.
+ */
+void ZooKeeper::deleteAnimalData(vector<Animal *> &t_animals)
+{
+
+  // Declare and initialize the variables to be used in the method
+  int trackNum;
+  bool deleted = false;
+
+  cout << "*************************************************************" << endl;
+  cout << "**                The Wildlife Zoo App (Delete Animal)     **" << endl;
+  cout << "*************************************************************" << endl;
+  this->collectUserInput("Enter a Tracking Number #: ", trackNum);
+  cout << "*************************************************************" << endl;
+
+  if (0 < t_animals.size())
+  {
+    for (unsigned int i = 0; i < t_animals.size(); i++)
+    {
+      if (t_animals.at(i)->getTrackNum() == trackNum)
+      {
+        t_animals.erase(t_animals.begin() + i);
+        i = t_animals.size();
+        deleted = true;
+      }
+    }
+  }
+
+  if (deleted)
+  {
+    cout << "Animal [" << trackNum << "] deleted." << endl;
+  }
+  else
+  {
+    cout << "Animal [" << trackNum << "] was not found." << endl;
+  }
+  return;
 }
 
 /**
  * @brief Collect the Animal Data from the user.
  *
- * @param t_deserialzer The deserialer used to create the Animal object
+ * @param t_serializer The deserialer used to create the Animal object
  *
  * @return Animal the data collected by the user
  */
-Animal* Display::collectAnimalData(Deserialzer t_deserialzer) {
+Animal *ZooKeeper::collectAnimalData(Serializer t_serializer)
+{
 
-// Declare and initialize the variables to be used in the method
+  // Declare and initialize the variables to be used in the method
   int nursing;
   int eggs;
   int trackNum;
   string name;
   string subType;
-  Animal* animal = nullptr;
+  Animal *animal = nullptr;
 
   cout << "*************************************************************" << endl;
   cout << "**                The Wildlife Zoo App                     **" << endl;
   cout << "*************************************************************" << endl;
-  this->collectUserInput("Track #: ", &trackNum);
-  this->collectUserInput("Name: ", &name);
-  this->collectUserInput("Sub Type: ", &subType);
-  this->collectUserInput("Number of Eggs: ", &eggs);
-  this->collectUserInput("Nursing (1 = Yes, 0 = No): ", &nursing);
+  this->collectUserInput("Track #: ", trackNum);
+  cout << endl;
+  this->collectUserInput("Name: ", name);
+  cout << endl;
+  this->collectUserInput("Sub Type: ", subType);
+  cout << endl;
+  this->collectUserInput("Number of Eggs: ", eggs);
+  cout << endl;
+  this->collectUserInput("Nursing (1 = Yes, 0 = No): ", nursing);
+  cout << endl;
   cout << "*************************************************************" << endl;
 
-  animal = t_deserialzer.read(trackNum, name, subType, eggs, nursing);
-  this->displayContinueMenu();
+  animal = t_serializer.read(trackNum, name, subType, eggs, nursing);
   return animal;
 }
 
@@ -115,11 +162,12 @@ Animal* Display::collectAnimalData(Deserialzer t_deserialzer) {
  *
  * @return int The menu option selected by the user
  */
-int Display::displayMainMenu() {
-// Declare and initialize the user option.
+int ZooKeeper::displayMainMenu()
+{
+  // Declare and initialize the user option.
   int menuOption = 0;
 
-// Create the user input.
+  // Create the user input.
   string userInput;
 
   cout << "*************************************************************" << endl;
@@ -135,7 +183,8 @@ int Display::displayMainMenu() {
   cout << "*************************************************************" << endl;
   cout << "User Selection: ";
 
-  try {
+  try
+  {
 
     // Get the user input within the trycatch
     getline(cin, userInput);
@@ -144,13 +193,18 @@ int Display::displayMainMenu() {
     cout << endl;
 
     // Validate and parse the user input.
-    if (userInput.size() == 1 && isdigit(userInput.at(0))) {
+    if (userInput.size() == 1 && isdigit(userInput.at(0)))
+    {
       // substracting the asci value from 48 gives you the value entered by the user.
       menuOption = userInput.at(0) - 48;
-    } else {
+    }
+    else
+    {
       cout << "Invalid user input input: [" << userInput << "]." << endl;
     }
-  } catch (exception &e) {
+  }
+  catch (exception &e)
+  {
     cout << "Unrecognized user input." << endl;
   }
 
@@ -163,14 +217,16 @@ int Display::displayMainMenu() {
  *
  * @param The vector of t_animals to display
  */
-void Display::displayAnimals(vector<Animal*> &t_animals) {
+void ZooKeeper::displayAnimals(vector<Animal *> &t_animals)
+{
 
-// Declare and initialize function variables
+  // Declare and initialize function variables
   int numberOfEggs = 0;
   int nurseing = 0;
   Table table;
 
-  try {
+  try
+  {
 
     table.addHeader(new Column("TRACK #"));
     table.addHeader(new Column("NAME"));
@@ -179,12 +235,16 @@ void Display::displayAnimals(vector<Animal*> &t_animals) {
     table.addHeader(new Column("EGGS"));
     table.addHeader(new Column("NURSE"));
 
-    for (Animal *a : t_animals) {
+    for (Animal *a : t_animals)
+    {
 
-      if (dynamic_cast<Mammal*>(a) != nullptr) {
-        nurseing = dynamic_cast<Mammal*>(a)->isNursing();
-      } else {
-        numberOfEggs = dynamic_cast<Oviparous*>(a)->getNumberOfEggs();
+      if (dynamic_cast<Mammal *>(a) != nullptr)
+      {
+        nurseing = dynamic_cast<Mammal *>(a)->isNursing();
+      }
+      else
+      {
+        numberOfEggs = dynamic_cast<Oviparous *>(a)->getNumberOfEggs();
       }
 
       // Create a new row
@@ -214,10 +274,9 @@ void Display::displayAnimals(vector<Animal*> &t_animals) {
 
     // Display the table
     table.display();
-
-    // Display the continue screen
-    this->displayContinueMenu();
-  } catch (exception &e) {
+  }
+  catch (exception &e)
+  {
     cout << "Error printing our monthly investment report." << e.what() << endl;
   }
 
@@ -228,14 +287,15 @@ void Display::displayAnimals(vector<Animal*> &t_animals) {
  * @brief Display the continue menu.
  *
  */
-void Display::displayContinueMenu() {
+void ZooKeeper::displayContinueMenu()
+{
 
-// Declare the user input variable.
+  // Declare the user input variable.
   string userInput;
 
   cout << " Please press any key to continue: " << endl;
 
-// Get the user input within the try
+  // Get the user input within the try
   getline(cin, userInput);
 }
 
@@ -243,6 +303,7 @@ void Display::displayContinueMenu() {
  * @brief Display the exit screen
  *
  */
-void Display::displayExitScreen() {
+void ZooKeeper::displayExitScreen()
+{
   cout << "Goodbye!" << endl;
 }
